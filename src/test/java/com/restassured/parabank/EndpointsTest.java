@@ -61,7 +61,7 @@ public class EndpointsTest {
     @Test
     @Order(2)
     public void newAccountTest() {
-        String URL = "https://parabank.parasoft.com/parabank/services/bank/createAccount?customerId=12212&newAccountType=1&fromAccountId=12345";
+        String URL = "https://parabank.parasoft.com/parabank/services/bank/createAccount?customerId=12212&newAccountType=1&fromAccountId=13344";
         Response response = given()
                 .auth().basic("john", "demo")
                 .when().post(URL);
@@ -94,11 +94,11 @@ public class EndpointsTest {
     @Test
     @Order(4)
     public void transferFundsTest() {
-        String URL = "https://parabank.parasoft.com/parabank/services_proxy/bank/transfer?fromAccountId=12345&toAccountId=12456&amount=100";
+        String URL = "https://parabank.parasoft.com/parabank/services_proxy/bank/transfer?fromAccountId=13344&toAccountId=12345&amount=100";
         Response response = given()
                 .auth().basic("john", "demo")
                 .when().post(URL);
-        Assert.assertEquals("Successfully transferred $100 from account #12345 to account #12456", response.getBody().prettyPrint());
+        Assert.assertEquals("Successfully transferred $100 from account #13344 to account #12345", response.getBody().prettyPrint());
         Assert.assertEquals(200, response.getStatusCode());
     }
 
@@ -109,11 +109,11 @@ public class EndpointsTest {
     @Test
     @Order(5)
     public void accountActivityTest() {
-        String URL = "https://parabank.parasoft.com/parabank/services_proxy/bank/accounts/12345/transactions/month/All/type/All";
+        String URL = "https://parabank.parasoft.com/parabank/services_proxy/bank/accounts/13344/transactions/month/All/type/All";
         Response response = given()
                 .auth().basic("john", "demo")
                 .when().get(URL);
-        Assert.assertEquals("12345", response.body().jsonPath().getString("accountId[0]"));
+        Assert.assertEquals("13344", response.body().jsonPath().getString("accountId[0]"));
         Assert.assertEquals(200, response.getStatusCode());
     }
 
